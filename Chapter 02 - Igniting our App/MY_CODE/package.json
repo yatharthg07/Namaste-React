@@ -1,0 +1,14 @@
+{
+  "name": "my_code",
+  "version": "1.0.0",
+  "description": "my_code",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "yatharth gupta",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.10.0"
+  }
+}
