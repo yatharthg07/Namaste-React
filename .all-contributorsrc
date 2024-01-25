@@ -141,6 +141,24 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "shanmukhipriya99",
+      "name": "Shanmukhi Priya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37501487?v=4",
+      "profile": "https://github.com/shanmukhipriya99",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "prathmesh-cpu",
+      "name": "Prathamesh Dhavale",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56761941?v=4",
+      "profile": "https://github.com/prathmesh-cpu",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github",
