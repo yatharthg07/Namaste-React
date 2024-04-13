@@ -2,10 +2,13 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import resList from "../utils/MockData";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+
 
 const Body = () => {
   // Local State Variable - Super powerful variable
   const [listOfRestaurants, setListOfRestraunt] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState([]);
   useEffect(() => {
     fetchData();
@@ -18,6 +21,9 @@ const Body = () => {
     const json = await data.json();
     //   console.log(json);
     setListOfRestraunt(
+      json.data.cards[3].card.card.gridElements.infoWithStyle.restaurants
+    );
+    setFilteredList(
       json.data.cards[3].card.card.gridElements.infoWithStyle.restaurants
     );
   };
@@ -44,7 +50,7 @@ const Body = () => {
               const searchList = listOfRestaurants.filter(
                 (res) => res.info.name.toLowerCase().includes(searchText)
               );
-              setListOfRestraunt(searchList);
+              setFilteredList(searchList);
             }}
           >
             Search
@@ -54,10 +60,10 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            const filteredList = listOfRestaurants.filter(
+            const filteredRestaurant = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4
             );
-            setListOfRestraunt(filteredList);
+            setFilteredList(filteredRestaurant);
           }}
         >
           Top Rated Restaurants
@@ -67,13 +73,24 @@ const Body = () => {
         {/* {three ways to condiotional render 
         one is below
         one is using ternary operator as it restaurants
-        one is using && to render } */}
-      {(()=>{if(listOfRestaurants.length === 0 && searchText.length !== 0)  return(
+         {listOfRestaurants.length === 0 && searchText.length !== 0 ? (
             <div>No restaurants found</div>
-          );})()}
+          ) : (
+            listOfRestaurants.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant.info.id}
+                resData={restaurant}
+              />
+            ))
+        one is using && to render } */}
+      {/* {(()=>{if(listOfRestaurants.length === 0 && searchText.length !== 0)  return(
+            <div>No restaurants found</div>
+          );})()} */}
 
-        {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+        {filteredList.map((restaurant) => (
+        <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id} >
+        <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+        </Link >
         ))}
       </div>
     </div>
